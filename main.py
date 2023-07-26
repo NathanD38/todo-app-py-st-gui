@@ -2,45 +2,49 @@ from functions import get_todos, write_todos
 
 user_prompt = "Enter a todo: "
 filepath = 'todos.txt'
+actions = ['add', 'show', 'edit', 'complete', 'exit']
 
 while True:
     user_action = input("Type add, show, edit, complete, or exit: ")
     user_action = user_action.strip()
 
-    match user_action:
-        case 'add':
-            todo = input(user_prompt)
+    if user_action in actions:
+        match user_action:
+            case 'add':
+                todo = input(user_prompt)
 
-            todos = get_todos()
+                todos = get_todos()
 
-            todos.append(todo+"\n")
+                todos.append(todo+"\n")
 
-            write_todos(todos)
-        case 'show':
-            todos = get_todos()
+                write_todos(todos)
+            case 'show':
+                todos = get_todos()
 
-            todos = [todo.strip("\n") for todo in todos]
+                todos = [todo.strip("\n") for todo in todos]
 
-            for index, todo in enumerate(todos):
-                print(f'{index+1}-{todo}')
-        case 'edit':
-            todos = get_todos()
-            number = int(input('Which todo do you want to edit? ')) - 1
-            new_todo = input("Edit: ")
+                for index, todo in enumerate(todos):
+                    print(f'{index+1}-{todo}')
+            case 'edit':
+                todos = get_todos()
+                number = int(input('Which todo do you want to edit? ')) - 1
+                new_todo = input("Edit: ")
 
-            todos[number] = new_todo + "\n"
+                todos[number] = new_todo + "\n"
 
-            write_todos(todos)
-        case 'complete':
-            todos = get_todos()
+                write_todos(todos)
+            case 'complete':
+                todos = get_todos()
 
-            number = int(input('Which todo do you want to complete? ')) - 1
+                number = int(input('Which todo do you want to complete? ')) - 1
 
-            todos.pop(number)
+                todos.pop(number)
 
-            write_todos(todos)
-        case 'exit':
-            break
+                write_todos(todos)
+            case 'exit':
+                break
+    else:
+        print('Wrong input! Try again!')
 
 
 print('Bye!')
