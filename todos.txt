@@ -1,0 +1,4 @@
+sleep
+clear
+stop
+steal
