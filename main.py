@@ -2,15 +2,15 @@ from functions import get_todos, write_todos
 
 user_prompt = "Enter a todo: "
 filepath = 'todos.txt'
-actions = ['add', 'show', 'edit', 'complete', 'exit']
+actions = ['Add', 'Show', 'Edit', 'Complete', 'Exit']
 
 while True:
-    user_action = input("Type add, show, edit, complete, or exit: ")
-    user_action = user_action.strip()
+    user_action = input("Type Add, Show, Edit, Complete, or Exit: ")
+    user_action = user_action.strip().capitalize()
 
     if user_action in actions:
         match user_action:
-            case 'add':
+            case 'Add':
                 todo = input(user_prompt)
 
                 todos = get_todos()
@@ -18,14 +18,14 @@ while True:
                 todos.append(todo+"\n")
 
                 write_todos(todos)
-            case 'show':
+            case 'Show':
                 todos = get_todos()
 
                 todos = [todo.strip("\n") for todo in todos]
 
                 for index, todo in enumerate(todos):
                     print(f'{index+1}-{todo}')
-            case 'edit':
+            case 'Edit':
                 todos = get_todos()
                 number = int(input('Which todo do you want to edit? ')) - 1
                 new_todo = input("Edit: ")
@@ -33,7 +33,7 @@ while True:
                 todos[number] = new_todo + "\n"
 
                 write_todos(todos)
-            case 'complete':
+            case 'Complete':
                 todos = get_todos()
 
                 number = int(input('Which todo do you want to complete? ')) - 1
@@ -41,7 +41,7 @@ while True:
                 todos.pop(number)
 
                 write_todos(todos)
-            case 'exit':
+            case 'Exit':
                 break
     else:
         print('Wrong input! Try again!')
