@@ -1,3 +1,5 @@
+from functions import get_todos, write_todos
+
 user_prompt = "Enter a todo: "
 filepath = 'todos.txt'
 
@@ -9,41 +11,34 @@ while True:
         case 'add':
             todo = input(user_prompt)
 
-            with open(filepath) as file:
-                todos = file.readlines()
+            todos = get_todos()
 
             todos.append(todo+"\n")
 
-            with open(filepath, 'w') as file:
-                file.writelines(todos)
+            write_todos(todos)
         case 'show':
-            with open(filepath) as file:
-                todos = file.readlines()
+            todos = get_todos()
 
             todos = [todo.strip("\n") for todo in todos]
 
             for index, todo in enumerate(todos):
                 print(f'{index+1}-{todo}')
         case 'edit':
-            with open(filepath) as file:
-                todos = file.readlines()
+            todos = get_todos()
             number = int(input('Which todo do you want to edit? ')) - 1
             new_todo = input("Edit: ")
 
             todos[number] = new_todo + "\n"
 
-            with open(filepath, 'w') as file:
-                file.writelines(todos)
+            write_todos(todos)
         case 'complete':
-            with open(filepath) as file:
-                todos = file.readlines()
+            todos = get_todos()
 
             number = int(input('Which todo do you want to complete? ')) - 1
 
             todos.pop(number)
 
-            with open(filepath, 'w') as file:
-                file.writelines(todos)
+            write_todos(todos)
         case 'exit':
             break
 
