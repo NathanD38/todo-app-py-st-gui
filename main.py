@@ -19,17 +19,29 @@ while True:
         case 'show':
             with open(filepath) as file:
                 todos = file.readlines()
+
             for index, todo in enumerate(todos):
                 print(f'{index+1}-{todo}')
         case 'edit':
+            with open(filepath) as file:
+                todos = file.readlines()
             number = int(input('Which todo do you want to edit? ')) - 1
             new_todo = input("Edit: ")
-            todos[number] = new_todo
-            with open(filepath, 'a') as file:
-                file.writelines(new_todo)
+
+            todos[number] = new_todo + "\n"
+
+            with open(filepath, 'w') as file:
+                file.writelines(todos)
         case 'complete':
+            with open(filepath) as file:
+                todos = file.readlines()
+
             number = int(input('Which todo do you want to complete? ')) - 1
+
             todos.pop(number)
+
+            with open(filepath, 'w') as file:
+                file.writelines(todos)
         case 'exit':
             break
 
