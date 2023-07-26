@@ -20,6 +20,8 @@ while True:
             with open(filepath) as file:
                 todos = file.readlines()
 
+            todos = [todo.strip("\n") for todo in todos]
+
             for index, todo in enumerate(todos):
                 print(f'{index+1}-{todo}')
         case 'edit':
