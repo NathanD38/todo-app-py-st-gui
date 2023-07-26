@@ -13,6 +13,10 @@ while True:
         case 'show':
             for todo in todos:
                 print(todo)
+        case 'edit':
+            number = int(input('Which todo do you want to edit? '))-1
+            new_todo = input("Edit: ")
+            todos[number] = new_todo
         case 'exit':
             break
 
