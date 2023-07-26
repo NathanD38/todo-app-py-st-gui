@@ -3,7 +3,7 @@ user_prompt = "Enter a todo: "
 todos = []
 
 while True:
-    user_action = input("Type add or show: ")
+    user_action = input("Type add, show, or exit: ")
 
     match user_action:
         case 'add':
@@ -11,3 +11,8 @@ while True:
             todos.append(todo)
         case 'show':
             print(todos)
+        case 'exit':
+            break
+
+
+print('Bye!')
