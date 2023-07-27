@@ -31,9 +31,9 @@ while True:
                 for index, todo in enumerate(todos):
                     print(f'{index+1}-{todo.capitalize()}')
             case 'Edit':
-                number = int(input('Which todo do you want to edit? ')) - 1
                 todos = get_todos()
-                if number <= len(todos)-1:
+                number = int(input('Which todo do you want to edit? ')) - 1
+                if number <= len(todos) - 1:
                     new_todo = input("Edit: ")
 
                     todos[number] = new_todo + "\n"
