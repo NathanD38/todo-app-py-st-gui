@@ -1,8 +1,8 @@
-clean
-steal
-wait
 swim
-clear
-swim
-learn
 pour
+kill
+trim
+row
+toll
+sweep
+laugh
