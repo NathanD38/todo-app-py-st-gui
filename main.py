@@ -1,7 +1,6 @@
 from functions import get_todos, write_todos
 
 user_prompt = "Enter a todo: "
-filepath = 'todos.txt'
 actions = ['Add', 'Show', 'Edit', 'Complete', 'Exit']
 
 while True:
@@ -24,7 +23,7 @@ while True:
                 todos = [todo.strip("\n") for todo in todos]
 
                 for index, todo in enumerate(todos):
-                    print(f'{index+1}-{todo}')
+                    print(f'{index+1}-{todo.capitalize()}')
             case 'Edit':
                 todos = get_todos()
                 number = int(input('Which todo do you want to edit? ')) - 1
