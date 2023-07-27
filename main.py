@@ -25,21 +25,31 @@ while True:
                 for index, todo in enumerate(todos):
                     print(f'{index+1}-{todo.capitalize()}')
             case 'Edit':
-                todos = get_todos()
                 number = int(input('Which todo do you want to edit? ')) - 1
-                new_todo = input("Edit: ")
-
-                todos[number] = new_todo + "\n"
-
-                write_todos(todos)
-            case 'Complete':
                 todos = get_todos()
+                if number <= len(todos)-1:
+                    new_todo = input("Edit: ")
 
-                number = int(input('Which todo do you want to complete? ')) - 1
+                    todos[number] = new_todo + "\n"
 
-                todos.pop(number)
+                    write_todos(todos)
+                else:
+                    print('There is no item with that number!')
+                    continue
+            case 'Complete':
+                try:
+                    todos = get_todos()
 
-                write_todos(todos)
+                    number = int(input('Which todo do you want to complete? ')) - 1
+                    todo_to_remove = todos[number].strip('\n').capitalize()
+
+                    todos.pop(number)
+
+                    write_todos(todos)
+                    print(f'{todo_to_remove} was marked as complete and removed from the list')
+                except IndexError:
+                    print('There is no item with that number!')
+                    continue
             case 'Exit':
                 break
     else:

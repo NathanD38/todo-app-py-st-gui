@@ -1,4 +1,3 @@
+clean
 steal
-clear
-sleep
-pick
+swim
