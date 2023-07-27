@@ -1,9 +1,15 @@
 from functions import get_todos, write_todos
+from datetime import datetime
 
 user_prompt = "Enter a todo: "
 actions = ['Add', 'Show', 'Edit', 'Complete', 'Exit']
 
+current_date = datetime.now()
+formatted_date = current_date.strftime('It is %b %d, %Y %H:%M:%S')
+print(formatted_date)
+
 while True:
+
     user_action = input("Type Add, Show, Edit, Complete, or Exit: ")
     user_action = user_action.strip().capitalize()
 
