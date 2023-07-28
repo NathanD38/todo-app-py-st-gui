@@ -4,7 +4,7 @@ import PySimpleGUI as psg
 #
 # current_date = datetime.now()
 # formatted_date = current_date.strftime('It is %b %d, %Y %H:%M:%S')
-# print(formatted_date)
+# # print(formatted_date)
 
 label = psg.Text("Type in a To-do:")
 input_box = psg.InputText(tooltip='Enter a to-do item', key='todo')
