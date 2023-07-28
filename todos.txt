@@ -1,9 +1,7 @@
-swim
-mow
-row
-keep
+lure
+kill
+pull
 sleep
-port
-laugh
-kit
-clear
+steal
+strip
+skin
