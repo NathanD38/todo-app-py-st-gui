@@ -26,34 +26,48 @@ while True:
     print(values)
     match event:
         case "Add":
-            todos = get_todos()
-            new_todo = values['todo'] + "\n"
-            todos.append(new_todo)
-            write_todos(todos)
-            app_gui['todos'].update(values=todos)
-            app_gui['todo'].update(value='')
+            if values['todo'] != '':
+                todos = get_todos()
+                new_todo = values['todo'] + "\n"
+                todos.append(new_todo)
+                write_todos(todos)
+                app_gui['todos'].update(values=todos)
+                app_gui['todo'].update(value='')
+            else:
+                psg.Popup('Please type an item first!', title='Error', font=('Helvetica', 15), auto_close=True, auto_close_duration=5)
+
         case "Edit":
-            todo_to_edit = values['todos'][0]
-            new_todo = values['todo']
-            todos = get_todos()
-            index = todos.index(todo_to_edit)
-            todos[index] = new_todo + "\n"
-            write_todos(todos)
-            app_gui['todos'].update(values=todos)
-            app_gui['todo'].update(value='')
+            try:
+                todo_to_edit = values['todos'][0]
+                new_todo = values['todo']
+                todos = get_todos()
+                index = todos.index(todo_to_edit)
+                todos[index] = new_todo + "\n"
+                write_todos(todos)
+                app_gui['todos'].update(values=todos)
+                app_gui['todo'].update(value='')
+            except IndexError:
+                psg.Popup('Please select an item first!', title='Error', font=('Helvetica', 15), auto_close=True, auto_close_duration=5)
+
         case "Complete":
-            todo_to_complete = values['todos'][0]
-            new_todo = values['todo']
-            todos = get_todos()
-            index = todos.index(todo_to_complete)
-            todos.remove(todos[index])
-            write_todos(todos)
-            app_gui['todos'].update(values=todos)
-            app_gui['todo'].update(value='')
+            try:
+                todo_to_complete = values['todos'][0]
+                new_todo = values['todo']
+                todos = get_todos()
+                index = todos.index(todo_to_complete)
+                todos.remove(todos[index])
+                write_todos(todos)
+                app_gui['todos'].update(values=todos)
+                app_gui['todo'].update(value='')
+            except IndexError:
+                psg.Popup('Please select an item first!', title='Error', font=('Helvetica', 15), auto_close=True, auto_close_duration=5)
+
         case 'todos':
             app_gui['todo'].update(value=values['todos'][0])
+
         case "Exit":
             break
+
         case psg.WIN_CLOSED:
             break
 
