@@ -31,6 +31,7 @@ while True:
             todos.append(new_todo)
             write_todos(todos)
             app_gui['todos'].update(values=todos)
+            app_gui['todo'].update(value='')
         case "Edit":
             todo_to_edit = values['todos'][0]
             new_todo = values['todo']
@@ -39,6 +40,7 @@ while True:
             todos[index] = new_todo + "\n"
             write_todos(todos)
             app_gui['todos'].update(values=todos)
+            app_gui['todo'].update(value='')
         case "Complete":
             todo_to_complete = values['todos'][0]
             new_todo = values['todo']
@@ -47,6 +49,7 @@ while True:
             todos.remove(todos[index])
             write_todos(todos)
             app_gui['todos'].update(values=todos)
+            app_gui['todo'].update(value='')
         case 'todos':
             app_gui['todo'].update(value=values['todos'][0])
         case "Exit":
