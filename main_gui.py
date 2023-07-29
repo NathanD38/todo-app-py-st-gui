@@ -23,10 +23,10 @@ while True:
     app_gui['clock'].update(value=time.strftime('%b %d, %Y %H:%M:%S'))
     selected_todos = values['todos']
     selected_todo = values['todo']
+    new_todo = selected_todo.replace("\n", "") + "\n"
     match event:
         case "Add":
             try:
-                new_todo = selected_todo.replace("\n", "") + "\n"
                 if len(selected_todos) > 0 or selected_todo != '':
                     todos = get_todos()
                     print(todos)
@@ -47,7 +47,6 @@ while True:
         case "Edit":
             try:
                 todo_to_edit = selected_todos[0]
-                new_todo = selected_todo.replace("\n", "") + "\n"
                 todos = get_todos()
                 print(todos)
                 index = todos.index(todo_to_edit)
@@ -62,7 +61,6 @@ while True:
         case "Complete":
             try:
                 todo_to_complete = selected_todos[0]
-                new_todo = selected_todo.replace("\n", "") + "\n"
                 todos = get_todos()
                 print(todos)
                 index = todos.index(todo_to_complete)
