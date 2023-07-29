@@ -26,27 +26,32 @@ while True:
     match event:
         case "Add":
             try:
+                new_todo = selected_todo.replace("\n", "") + "\n"
                 if len(selected_todos) > 0 or selected_todo != '':
                     todos = get_todos()
                     print(todos)
-                    new_todo = selected_todo + "\n"
                     todos.append(new_todo)
                     write_todos(todos)
                     print(todos)
                     app_gui['todos'].update(values=todos)
                     app_gui['todo'].update(value='')
                 else:
-                    psg.Popup('Please type an item first!', title='Error', font=('Helvetica', 15), auto_close=True, auto_close_duration=5)
+                    psg.Popup('Please type an item first!', title='Error',
+                              font=('Helvetica', 15), auto_close=True,
+                              auto_close_duration=5)
             except IndexError:
-                print("There are no items in the list!")
+                psg.Popup('There are no items in the list!', title='Error',
+                          font=('Helvetica', 15), auto_close=True,
+                          auto_close_duration=5)
+
         case "Edit":
             try:
                 todo_to_edit = selected_todos[0]
-                new_todo = selected_todo
+                new_todo = selected_todo.replace("\n", "") + "\n"
                 todos = get_todos()
                 print(todos)
                 index = todos.index(todo_to_edit)
-                todos[index] = new_todo + "\n"
+                todos[index] = new_todo
                 write_todos(todos)
                 print(todos)
                 app_gui['todos'].update(values=todos)
@@ -57,7 +62,7 @@ while True:
         case "Complete":
             try:
                 todo_to_complete = selected_todos[0]
-                new_todo = selected_todo
+                new_todo = selected_todo.replace("\n", "") + "\n"
                 todos = get_todos()
                 print(todos)
                 index = todos.index(todo_to_complete)
@@ -66,8 +71,6 @@ while True:
                 print(todos)
                 app_gui['todos'].update(values=todos)
                 app_gui['todo'].update(value='')
-            except ValueError:
-                psg.Popup('Item is not in the to-do list!', title='Error', font=('Helvetica', 15), auto_close=True, auto_close_duration=5)
             except IndexError:
                 psg.Popup('Please select an item first!', title='Error', font=('Helvetica', 15), auto_close=True, auto_close_duration=5)
 
