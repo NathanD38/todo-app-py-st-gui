@@ -28,13 +28,19 @@ while True:
         case "Add":
             try:
                 if len(selected_todos) > 0 or selected_todo != '':
-                    todos = get_todos()
-                    print(todos)
-                    todos.append(new_todo)
-                    write_todos(todos)
-                    print(todos)
-                    app_gui['todos'].update(values=todos)
-                    app_gui['todo'].update(value='')
+                    if selected_todo != new_todo and selected_todos[0].strip("\n") != selected_todo:
+                        todos = get_todos()
+                        print(todos)
+                        todos.append(new_todo)
+                        write_todos(todos)
+                        print(todos)
+                        app_gui['todos'].update(values=todos)
+                        app_gui['todo'].update(value='')
+                    else:
+                        psg.Popup('Item already in list!', title='Error',
+                                  font=('Helvetica', 15), auto_close=True,
+                                  auto_close_duration=5)
+                        app_gui['todo'].update(value='')
                 else:
                     psg.Popup('Please type an item first!', title='Error',
                               font=('Helvetica', 15), auto_close=True,
