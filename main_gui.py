@@ -28,7 +28,8 @@ while True:
         case "Add":
             try:
                 if len(selected_todos) > 0 or selected_todo != '':
-                    if selected_todo != new_todo and selected_todos[0].strip("\n") != selected_todo:
+                    if selected_todo != new_todo:
+                        # or selected_todos[0].strip("\n") != selected_todo
                         todos = get_todos()
                         print(todos)
                         todos.append(new_todo)

@@ -1,3 +1,5 @@
+import streamlit
+
 FILEPATH = 'todos.txt'
 
 
@@ -12,6 +14,8 @@ def write_todos(todos, filepath=FILEPATH):
     """Write the to-do items in the text file"""
     with open(filepath, 'w') as file:
         file.writelines(todos)
+
+
 
 
 if __name__ == "__main__":
