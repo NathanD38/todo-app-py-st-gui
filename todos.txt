@@ -1,7 +1,0 @@
-lure
-kill
-pull
-sleep
-steal
-strip
-skin

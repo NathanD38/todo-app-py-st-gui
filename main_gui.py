@@ -21,26 +21,34 @@ app_gui = psg.Window(title='My To-Do App',
 while True:
     event, values = app_gui.read(timeout=200)
     app_gui['clock'].update(value=time.strftime('%b %d, %Y %H:%M:%S'))
+    selected_todos = values['todos']
+    selected_todo = values['todo']
     match event:
         case "Add":
-            if values['todo'] != '':
-                todos = get_todos()
-                new_todo = values['todo'] + "\n"
-                todos.append(new_todo)
-                write_todos(todos)
-                app_gui['todos'].update(values=todos)
-                app_gui['todo'].update(value='')
-            else:
-                psg.Popup('Please type an item first!', title='Error', font=('Helvetica', 15), auto_close=True, auto_close_duration=5)
-
+            try:
+                if len(selected_todos) > 0 or selected_todo != '':
+                    todos = get_todos()
+                    print(todos)
+                    new_todo = selected_todo + "\n"
+                    todos.append(new_todo)
+                    write_todos(todos)
+                    print(todos)
+                    app_gui['todos'].update(values=todos)
+                    app_gui['todo'].update(value='')
+                else:
+                    psg.Popup('Please type an item first!', title='Error', font=('Helvetica', 15), auto_close=True, auto_close_duration=5)
+            except IndexError:
+                print("There are no items in the list!")
         case "Edit":
             try:
-                todo_to_edit = values['todos'][0]
-                new_todo = values['todo']
+                todo_to_edit = selected_todos[0]
+                new_todo = selected_todo
                 todos = get_todos()
+                print(todos)
                 index = todos.index(todo_to_edit)
                 todos[index] = new_todo + "\n"
                 write_todos(todos)
+                print(todos)
                 app_gui['todos'].update(values=todos)
                 app_gui['todo'].update(value='')
             except IndexError:
@@ -48,12 +56,14 @@ while True:
 
         case "Complete":
             try:
-                todo_to_complete = values['todos'][0]
-                new_todo = values['todo']
+                todo_to_complete = selected_todos[0]
+                new_todo = selected_todo
                 todos = get_todos()
+                print(todos)
                 index = todos.index(todo_to_complete)
                 todos.remove(todos[index])
                 write_todos(todos)
+                print(todos)
                 app_gui['todos'].update(values=todos)
                 app_gui['todo'].update(value='')
             except ValueError:
@@ -62,7 +72,10 @@ while True:
                 psg.Popup('Please select an item first!', title='Error', font=('Helvetica', 15), auto_close=True, auto_close_duration=5)
 
         case 'todos':
-            app_gui['todo'].update(value=values['todos'][0])
+            try:
+                app_gui['todo'].update(value=selected_todos[0])
+            except IndexError:
+                psg.Popup('There are no items in the list!', title='Error', font=('Helvetica', 15), auto_close=True, auto_close_duration=5)
 
         case "Exit":
             break
