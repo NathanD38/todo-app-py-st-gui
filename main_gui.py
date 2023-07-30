@@ -27,9 +27,9 @@ while True:
     match event:
         case "Add":
             try:
-                if len(selected_todos) > 0 or selected_todo != '':
-                    if selected_todo != new_todo:
-                        # or selected_todos[0].strip("\n") != selected_todo
+                if new_todo not in selected_todos:
+                    if len(selected_todos) > 0 or selected_todo != '':
+
                         todos = get_todos()
                         print(todos)
                         todos.append(new_todo)
@@ -38,14 +38,15 @@ while True:
                         app_gui['todos'].update(values=todos)
                         app_gui['todo'].update(value='')
                     else:
-                        psg.Popup('Item already in list!', title='Error',
+                        psg.Popup('Please type an item first!', title='Error',
                                   font=('Helvetica', 15), auto_close=True,
                                   auto_close_duration=5)
-                        app_gui['todo'].update(value='')
                 else:
-                    psg.Popup('Please type an item first!', title='Error',
+                    psg.Popup('Item already in list!', title='Error',
                               font=('Helvetica', 15), auto_close=True,
                               auto_close_duration=5)
+                    app_gui['todo'].update(value='')
+
             except IndexError:
                 psg.Popup('There are no items in the list!', title='Error',
                           font=('Helvetica', 15), auto_close=True,
